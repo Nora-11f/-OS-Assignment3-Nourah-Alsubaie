@@ -130,7 +130,8 @@ class Process implements Runnable {
             if (startTime == -1) {
                 startTime = System.currentTimeMillis();
             }
-            
+            // Acquire CPU access before execution
+        SharedResources.cpuSemaphore.acquire();
             // Increment context switch counter
             SharedResources.incrementContextSwitch();
             
