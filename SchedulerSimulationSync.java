@@ -38,6 +38,11 @@ class SharedResources {
     
     // TODO #1: Add a ReentrantLock(s) here to protect critical sections
     // Example: public static final ReentrantLock lock = new ReentrantLock();
+    // Added lock to protect shared resources
+public static final ReentrantLock lock = new ReentrantLock();
+
+// Added semaphore to limit CPU access (only one process at a time)
+public static final Semaphore cpuSemaphore = new Semaphore(1);
     
     // TODO #2: Add a Semaphore to limit concurrent process execution
     // Example: public static final Semaphore cpuSemaphore = new Semaphore(1);
