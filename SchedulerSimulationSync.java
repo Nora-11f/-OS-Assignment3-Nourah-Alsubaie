@@ -90,7 +90,13 @@ public static final Semaphore cpuSemaphore = new Semaphore(1);
     public static void logExecution(String message) {
         // TODO: Protect this critical section with a lock
         // RACE CONDITION: ArrayList is not thread-safe!
-        executionLog.add(message);
+       // Added lock protection for execution log
+    lock.lock();
+    try {
+    executionLog.add(message);
+    } finally {
+    lock.unlock();
+    }
     }
 }
 
