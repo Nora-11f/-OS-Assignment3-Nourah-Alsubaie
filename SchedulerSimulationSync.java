@@ -187,8 +187,9 @@ class Process implements Runnable {
             System.out.println();
             
         } finally {
-            // TODO #4: Release CPU semaphore here
-            // Always release in finally block to prevent deadlocks!
+            // TODO R#4: Release CPU semaphore here
+          // Release CPU access after execution
+SharedResources.cpuSemaphore.release();
         }
     }
     
