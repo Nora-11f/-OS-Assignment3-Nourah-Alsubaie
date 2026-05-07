@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+// Added for synchronization using locks
+import java.util.concurrent.locks.ReentrantLock;
+
+// Added for controlling CPU access
+import java.util.concurrent.Semaphore;
 
 // ANSI Color Codes for enhanced terminal output
 class Colors {
@@ -49,9 +54,13 @@ public static final Semaphore cpuSemaphore = new Semaphore(1);
     
     // Method to increment context switch counter
     public static void incrementContextSwitch() {
-        // TODO: Protect this critical section with a lock
-        // RACE CONDITION: Multiple threads might read and write simultaneously!
-        contextSwitchCount++;
+       // Added lock protection for context switch counter
+    lock.lock();
+      try {
+    contextSwitchCount++;
+    } finally {
+    lock.unlock();
+}
     }
     
     // Method to increment completed process counter
